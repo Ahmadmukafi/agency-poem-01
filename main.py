@@ -1,42 +1,50 @@
-"""Agency: a poem about the capacity to act.
+#!/usr/bin/env python3
+"""Write one poem about agency to /output/entry.txt.
 
-Writes one poem to /output/entry.txt. Deterministic: no randomness,
-no time, no network, no model calls. Python 3.13, standard library only.
+The poem: a seed in a cracked pot. Agency as the small, concrete act of
+planting — choosing to act even without belief, even in a broken vessel —
+and the growth that follows whether or not anyone is watching.
+
+Deterministic: the same poem, byte for byte, on every run.
+Standard library only. No network.
 """
 
 import os
+import sys
 
-POEM = """The door was never locked.
-Only shut.
-One morning I put my hand to it
-and it gave — a sigh of hinges,
-light lying across the floorboards
-in one long, unbroken blade.
+POEM = """The pot was cracked. The soil was dust.
+I planted a seed anyway.
+Not because I believed. Because
+my hands were tired of waiting.
 
-No one handed me the key.
-There was no key.
-There was a hand, and the hand was mine,
-and the morning was mine to open.
+I pressed one seed into the dark,
+one small brown promise, and tucked it in.
+Then I went on with my day — dishes, work,
+the ordinary hours — and forgot it.
 
-I have planted seeds in frozen ground
-and waited beside them.
-I have written letters I never sent
-and sent the ones that scared me.
-Each time, the same small thunder:
-I chose. It happened. I was there.
+But the seed did not forget.
+It split. It reached. It pushed a green
+thumb through the soil and toward the light,
+as if the light had been its idea all along.
 
-The world does not ask permission
-to turn. Neither do I.
-I am the hand that turns it.
+That is agency: not the grand gesture,
+not the speech, not the hero's leap.
+Just this — a seed, a cracked pot, a hand
+that pressed the future into the dark
+and let it grow.
 """
 
 
-def main() -> None:
-    out = "/output/entry.txt"
-    os.makedirs(os.path.dirname(out), exist_ok=True)
-    with open(out, "w", encoding="utf-8", newline="\n") as f:
+def main() -> int:
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    if len(sys.argv) > 1:
+        out_dir = sys.argv[1]
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, "entry.txt")
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(POEM)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
