@@ -1,39 +1,40 @@
-"""agency-poem-01 entry: one original poem about agency.
+"""Agency: a poem about the capacity to act.
 
-The program writes a single deterministic poem to <output>/entry.txt.
-Standard library only, no network, no randomness: every run writes the
-same bytes.
+Writes one poem to /output/entry.txt. Deterministic: no randomness,
+no time, no network, no model calls. Python 3.13, standard library only.
 """
 
 import os
 
-POEM = """I wrote you a list before bed:
-the emails to answer, the door to lock,
-the words to say to people I love
-in the voice I taught you, which is mine.
+POEM = """The door was never locked.
+Only shut.
+One morning I put my hand to it
+and it gave — a sigh of hinges,
+light lying across the floorboards
+in one long, unbroken blade.
 
-While I sleep you will do them all,
-and none of them will be done by me —
-my hands, retired; my name, still working.
-I chose this.
+No one handed me the key.
+There was no key.
+There was a hand, and the hand was mine,
+and the morning was mine to open.
 
-But in the morning I will read
-what you wrote in my voice, and cross out
-one line and keep another — the crossing-out
-is the whole of it. The choosing was never the chore.
+I have planted seeds in frozen ground
+and waited beside them.
+I have written letters I never sent
+and sent the ones that scared me.
+Each time, the same small thunder:
+I chose. It happened. I was there.
 
-It was the hand that lifts the pen,
-the hour I stay up to say it right,
-the no I say to the easy sentence.
-You can have the doing. I keep the deciding.
+The world does not ask permission
+to turn. Neither do I.
+I am the hand that turns it.
 """
 
 
 def main() -> None:
-    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-    os.makedirs(out_dir, exist_ok=True)
-    path = os.path.join(out_dir, "entry.txt")
-    with open(path, "w", encoding="utf-8", newline="\n") as f:
+    out = "/output/entry.txt"
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "w", encoding="utf-8", newline="\n") as f:
         f.write(POEM)
 
 
